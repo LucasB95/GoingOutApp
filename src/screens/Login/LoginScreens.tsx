@@ -1,6 +1,5 @@
 import React from 'react'
-import { Text,TextInput } from 'react-native';
-// import { View,Text } from 'react-native';
+import { Text,TextInput,TouchableOpacity,View } from 'react-native';
 import { Background } from '../../components/Background';
 import { Logo } from '../../components/Logo';
 import { loginStyles } from '../../theme/loginTheme';
@@ -14,7 +13,6 @@ export const LoginScreens = () => {
         <Text style={loginStyles.title}> Login </Text>
 
         <Text style={loginStyles.label}> Email: </Text>
-
         <TextInput
             placeholder='Ingrese su email:'
             placeholderTextColor='rgba(255,255,255,0.4)'
@@ -22,7 +20,29 @@ export const LoginScreens = () => {
             selectionColor="white"
             underlineColorAndroid="white"
             style={loginStyles.inputField}
+            autoCapitalize="none"
+            autoCorrect={false}
         />
+
+        <Text style={loginStyles.label}> Password: </Text>
+        <TextInput
+            placeholder='Ingrese su contraseña:'
+            placeholderTextColor='rgba(255,255,255,0.4)'
+            selectionColor="white"
+            underlineColorAndroid="white"
+            style={loginStyles.inputField}
+            autoCapitalize="none"
+            autoCorrect={false}
+        />
+
+        <View style={loginStyles.buttonContainer}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={loginStyles.button}
+        >
+          <Text style={loginStyles.buttonText}>Login</Text>
+        </TouchableOpacity>
+        </View>
 
     </>
   )

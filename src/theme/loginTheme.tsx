@@ -15,5 +15,21 @@ export const loginStyles = StyleSheet.create({
     inputField:{
         color: 'white',
         fontSize: 15
+    },
+    buttonContainer:{
+    alignItems:"center",
+    marginTop: 50
+    },
+    button:{
+        borderWidth: 2,
+        borderColor: "white",
+        paddingHorizontal: 20,
+        paddingVertical: 5,
+        borderRadius: 100
+    },
+    buttonText:{
+        fontSize: 18,
+        color: "white"
     }
+
 });
