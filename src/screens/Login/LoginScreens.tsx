@@ -5,34 +5,34 @@ import { Logo } from '../../components/Logo';
 import { loginStyles } from '../../theme/loginTheme';
 import { useForm } from '../../hooks/useForm';
 import { StackScreenProps } from '@react-navigation/stack';
-//import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 
 
 interface Props extends StackScreenProps<any,any>{}
 
 export const LoginScreens = ({navigation}: Props) => {
 
-  //const { signIn, errorMessage, removeError } = useContext( AuthContext );
+  const { signIn, errorMessage, removeError } = useContext( AuthContext );
 
   const {email,password,onChange} = useForm({
     email: '',
     password:''
   });
 
-//   useEffect(() => {
-//     if( errorMessage.length === 0 ) return;
+  useEffect(() => {
+    //if( errorMessage.length === 0 ) return;
 
-//     Alert.alert( 'Login incorrecto', errorMessage,[{
-//         text: 'Ok',
-//         onPress: removeError
-//     }]);
+    Alert.alert( 'Login incorrecto', errorMessage,[{
+        text: 'Ok',
+        onPress: removeError
+    }]);
 
-// }, [ errorMessage ])
+}, [ errorMessage ])
 
   const onLogin = () => {
     console.log({email,password});
     Keyboard.dismiss();
-    //signIn({ correo: email, password });
+    signIn({ userName: email, userPassword: password, userLanguage: '1' });
   }
   return (
     <>
@@ -92,14 +92,15 @@ export const LoginScreens = ({navigation}: Props) => {
               </TouchableOpacity>
               </View>
 
-              <View style={loginStyles.newUserContainer}>
+              {/* <View style={loginStyles.newUserContainer}> */}
               <TouchableOpacity
                 activeOpacity={0.8}
-                onPress={() => navigation.navigate('RegisterScreens')}
+                onPress={ () => navigation.replace('RegisterScreen') }
+                style={ loginStyles.newUserContainer }
               >
                 <Text style={loginStyles.buttonText}>Nueva cuenta</Text>
               </TouchableOpacity>
-              </View>
+              {/* </View> */}
   
         </View>
       </KeyboardAvoidingView>

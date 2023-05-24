@@ -1,12 +1,22 @@
 import React from 'react'
-// import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { Navigation } from './src/navigation/Navigation';
+import { AuthProvider } from './src/context/AuthContext';
+
+const AppState = ({ children }: any ) => {
+  return (
+    <AuthProvider>
+      { children }
+    </AuthProvider>
+  )
+}
 
 export const App = () => {
   return (
     <NavigationContainer>
-            <Navigation/>
+      <AppState>
+        <Navigation />
+      </AppState>
     </NavigationContainer>
   )
 }

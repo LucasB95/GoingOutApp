@@ -94,13 +94,16 @@ export const RegisterScreens = ({navigation}: Props) => {
               </TouchableOpacity>
               </View>
 
+              {/* <View style={loginStyles.buttonContainer}> */}
               <TouchableOpacity
                         onPress={ () => navigation.replace('LoginScreen') }
                         activeOpacity={ 0.8 }
                         style={ loginStyles.buttonReturn }
                     >
-                        <Text style={ loginStyles.buttonText  }>Login</Text>
-                    </TouchableOpacity>
+              <Text style={ loginStyles.buttonText  }>Login</Text>
+              </TouchableOpacity>
+
+              {/* </View> */}
   
         </View>
       </KeyboardAvoidingView>
