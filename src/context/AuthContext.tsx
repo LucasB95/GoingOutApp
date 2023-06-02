@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useReducer } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import GoingOutAPI from '../api/GoingOutAPI';
-import axios from "axios";
+import axios from 'axios';
 
 import { Usuario, LoginResponse, LoginData, RegisterData,LoginResponseGoingOut } from '../interfaces/appInterfaces';
 import { authReducer, AuthState } from './AuthReducer';
@@ -37,24 +37,24 @@ export const AuthProvider = ({ children }: any)=> {
     }, [])
 
     const checkToken = async() => {
-        const token = await AsyncStorage.getItem('token');
-        // No token, no autenticado
-        if ( !token ) return dispatch({ type: 'notAuthenticated' });
+        // const token = await AsyncStorage.getItem('token');
+        // // No token, no autenticado
+        // if ( !token ) return dispatch({ type: 'notAuthenticated' });
 
-        // Hay token
-        const resp = await GoingOutAPI.get('/auth');
-        if ( resp.status !== 200 ) {
-            return dispatch({ type: 'notAuthenticated' });
-        }
+        // // Hay token
+        // const resp = await GoingOutAPI.get('/auth');
+        // if ( resp.status !== 200 ) {
+        //     return dispatch({ type: 'notAuthenticated' });
+        // }
         
-        await AsyncStorage.setItem('token', resp.data.token );
-        dispatch({ 
-            type: 'signUp',
-            payload: {
-                token: resp.data.token,
-                user: resp.data.usuario
-            }
-        });
+        // await AsyncStorage.setItem('token', resp.data.token );
+        // dispatch({ 
+        //     type: 'signUp',
+        //     payload: {
+        //         token: resp.data.token,
+        //         user: resp.data.usuario
+        //     }
+        // });
     }
 
 
@@ -64,7 +64,27 @@ export const AuthProvider = ({ children }: any)=> {
         try
         {
             console.log(userName, userPassword, userLanguage );
-            const resp = await GoingOutAPI.post<LoginResponseGoingOut>('/Authentication/Login', { userName, userPassword, userLanguage} );
+            // const resp = await GoingOutAPI.post<LoginResponseGoingOut>('/Authentication/Login', { 
+            //     "userName": userName, 
+            //     "userPassword": userPassword, 
+            //     "userLanguage": userLanguage} );
+
+        //    const resp = await GoingOutAPI.post<LoginResponseGoingOut>('/Authentication/Login', { 
+        //              userName, userPassword, userLanguage} );
+
+
+
+
+           await GoingOutAPI.get('/Status/isAlive')
+                .then(function (response) {
+            // handle success
+            console.log("ey"+response);
+          })
+          .catch(function (error) {
+            // handle error
+            console.log("error " +error);
+          })
+
             // axios.post('https://10.0.0.2:7200/api/Authentication/Login',{
             //     userName, userPassword, userLanguage
             //   })
@@ -72,13 +92,16 @@ export const AuthProvider = ({ children }: any)=> {
             //     console.log(response.data)
             //   })
             //   .catch(error => console.log(error));
-            
-            console.log("processs" );
-            console.log("process" + resp);
+            console.log("salio del axios");
+            // console.log("process" + resp);
 
         }catch(error)
         {
             console.log({error});
+            // dispatch({ 
+            //     type: 'addError', 
+            //     payload:  error.response.data.msg || 'Información incorrecta'
+            // })
         }
 
            
@@ -108,25 +131,25 @@ export const AuthProvider = ({ children }: any)=> {
     
     const signUp = async( { nombre, correo, password }: RegisterData ) => {
 
-        try {
+        // try {
          
-            const { data } = await GoingOutAPI.post<LoginResponse>('/usuarios', { correo, password, nombre } );
-            dispatch({ 
-                type: 'signUp',
-                payload: {
-                    token: data.token,
-                    user: data.usuario
-                }
-            });
+        //     const { data } = await GoingOutAPI.post<LoginResponse>('/usuarios', { correo, password, nombre } );
+        //     dispatch({ 
+        //         type: 'signUp',
+        //         payload: {
+        //             token: data.token,
+        //             user: data.usuario
+        //         }
+        //     });
 
-            await AsyncStorage.setItem('token', data.token );
+        //     await AsyncStorage.setItem('token', data.token );
 
-        } catch (error : any) {
-            dispatch({ 
-                type: 'addError', 
-                payload: error.response.data.errors[0].msg || 'Revise la información'
-            });
-        }
+        // } catch (error : any) {
+        //     dispatch({ 
+        //         type: 'addError', 
+        //         payload: error.response.data.errors[0].msg || 'Revise la información'
+        //     });
+        // }
 
     };
 

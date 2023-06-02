@@ -18,9 +18,9 @@ export interface LoginResponse {
 }
 
 export interface LoginResponseGoingOut {
-    tokenGoingOut:   string;
-    status: Usuario;
-    message: Usuario;
+    tokenGoingOut: string;
+    status: string;
+    message: string;
 }
 
 export interface Usuario {
